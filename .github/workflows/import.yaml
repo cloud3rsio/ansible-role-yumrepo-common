@@ -18,9 +18,9 @@ jobs:
           pip install ansible
       - name: Login ansible-galaxy
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TOKEN_FOR_ANSBILE_GALAXY: ${{ secrets.TOKEN_FOR_ANSBILE_GALAXY }}
         run: |
-          ansible-galaxy login --github-token="${GITHUB_TOKEN}"
+          ansible-galaxy login --github-token="${TOKEN_FOR_ANSBILE_GALAXY}"
       - name: Import Role
         run: |
           export GITHUB_USER=`echo ${GITHUB_REPOSITORY} | cut -d'/' -f1`
