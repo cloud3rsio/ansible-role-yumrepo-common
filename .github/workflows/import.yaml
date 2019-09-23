@@ -1,0 +1,28 @@
+name: Import role
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-python@v1
+        with:
+          python-version: 3
+      - name: Install ansible
+        run: |
+          pip install ansible
+      - name: Login ansible-galaxy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ansible-galaxy login --github-token="${GITHUB_TOKEN}"
+      - name: Import Role
+        run: |
+          export GITHUB_USER=`echo ${GITHUB_REPOSITORY} | cut -d'/' -f1`
+          export GITHUB_REPO=`echo ${GITHUB_REPOSITORY} | cut -d'/' -f1`
+          ansible-galaxy import ${GITHUB_USER} ${GITHUB_REPO}
