@@ -27,7 +27,7 @@ Example Playbook
 License
 -------
 
-MIT
+[MIT](LICENSE)
 
 Author Information
 ------------------
