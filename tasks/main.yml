@@ -9,10 +9,8 @@
   changed_when: False
   ignore_errors: True
   register: pt_status
-  when:
-    - ansible_distribution == "CentOS" and ansible_distribution_major_version == "8"
+  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "8"
 
 - name: Enabled CentOS PowerTools
   command: yum-config-manager --enable PowerTools
-  when:
-    - pt_status.rc != 0
+  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "8" and pt_status.rc != 0
